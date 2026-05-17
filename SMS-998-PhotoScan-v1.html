@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -630,7 +631,7 @@
  {
    "report_date":    "string",    // e.g. "18 Apr 2026"
    "next_scan_date": "string",    // e.g. "July 2026"
-   "report_id":      "string",    // e.g. "SMS-PS-2026-0000001"
+   "scan_id":        "string",    // e.g. "pay_SqUleGTaXnPL83"
    "submitted_photo_url": "string | null",  // hosted URL of the user's submitted photo
 
    "stats": {
@@ -689,8 +690,8 @@
       <div class="cover-meta-value">{{ report_date }}</div>
     </div>
     <div class="cover-meta-card">
-      <div class="cover-meta-label">Report ID</div>
-      <div class="cover-meta-value">{{ report_id }}</div>
+      <div class="cover-meta-label">Scan ID</div>
+      <div class="cover-meta-value">{{ scan_id }}</div>
     </div>
     <div class="cover-meta-card">
       <div class="cover-meta-label">Total Hits Found</div>
@@ -1032,6 +1033,12 @@
   <div class="cta-subline">Phone &amp; email results in 5 mins · Photo scan within 24 hours</div>
 </div>
 
+<div class="cta-box">
+  <div class="cta-box-label">Have questions about your results?</div>
+  <a class="cta-button" href="https://app.scanmyshadow.com/maya-standalone.html?id={{ scan_id }}" target="_blank">💬 Chat with Maya</a>
+  <div class="cta-subline">Maya is your privacy assistant — ask anything about your report</div>
+</div>
+
 <div class="deletion-box">
   <div class="deletion-title">🔒 Your data is permanently deleted in 96 hours</div>
   <div class="deletion-body">Your submitted photo, all scan results, and this report are automatically and permanently deleted within 96 hours. Nothing is stored after that. Please save this report — it cannot be re-issued once deleted.</div>
@@ -1040,7 +1047,7 @@
 <div class="report-footer">
   <div class="footer-main">ScanMyShadow · Operated by Jaishree Exports · GSTIN: 23AIVPG9795M1Z6 · Gwalior, MP, India</div>
   <div class="footer-conf">Confidential — not for redistribution</div>
-  <div class="footer-id">Report ID: {{ report_id }}</div>
+  <div class="footer-id">Scan ID: {{ scan_id }}</div>
 </div>
 
 </body>
