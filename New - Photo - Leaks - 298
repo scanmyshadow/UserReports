@@ -1237,19 +1237,7 @@
 
   .gold-divider { background: linear-gradient(90deg, transparent, var(--gold-bright), var(--gold-light), transparent); }
 
-  .upsell-card {
-    background: linear-gradient(135deg, #17191f, #27231b);
-    border: 1px solid rgba(234,217,170,0.28);
-    border-radius: 18px;
-    box-shadow: var(--shadow-md);
-  }
-  .upsell-card::before { background: linear-gradient(90deg, var(--gold), #ead59a, var(--gold-bright)); }
-  .upsell-eyebrow { letter-spacing: 0.15em; }
-  .btn-upgrade {
-    border-radius: 10px;
-    background: linear-gradient(160deg, #f3cf74, #c99a3a 58%, #a67922);
-    box-shadow: 0 10px 24px rgba(166,121,34,0.35);
-  }
+
 
   .cta-row { gap: 14px; }
   .btn-secondary {
@@ -1323,6 +1311,171 @@
     .photo-subject-frame { width: 136px; height: 136px; }
     .rescan-card { padding: 26px 20px; }
   }
+
+  /* ── REDESIGNED UPSELL CARD ── */
+  .upsell-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    background: linear-gradient(160deg, #fffdf7 0%, #fdf6e3 60%, #faf0cc 100%);
+    border: 1.5px solid rgba(201,154,58,0.35);
+    border-radius: 20px;
+    padding: 40px 36px;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(201,154,58,0.18), 0 2px 8px rgba(20,21,26,0.06);
+  }
+  .upsell-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #a67922, #d4a017, #f3cf74, #d4a017, #a67922);
+  }
+  .upsell-eyebrow {
+    font-size: 10.5px;
+    font-weight: 900;
+    color: #a67922;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .upsell-headline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #14151a;
+    margin-bottom: 10px;
+    line-height: 1.18;
+  }
+  .upsell-subline {
+    font-size: 13.5px;
+    color: #343843;
+    max-width: 460px;
+    margin: 0 auto 22px;
+    line-height: 1.68;
+  }
+  .upsell-bullets {
+    list-style: none;
+    margin: 0 auto 28px;
+    max-width: 400px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .upsell-bullets li {
+    font-size: 13.5px;
+    color: #14151a;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .upsell-bullets li::before {
+    content: '\2726';
+    color: #c99a3a;
+    font-size: 10px;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .btn-upgrade {
+    display: inline-block;
+    background: linear-gradient(160deg, #FFD000, #F5A800 50%, #E08C00);
+    color: #1A0F00;
+    font-size: 15px;
+    font-weight: 900;
+    padding: 16px 44px;
+    border-radius: 999px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    box-shadow: 0 6px 24px rgba(245,168,0,0.50), 0 2px 8px rgba(245,168,0,0.28), inset 0 1px 0 rgba(255,255,255,0.30);
+    margin-bottom: 14px;
+    text-shadow: 0 1px 0 rgba(255,200,0,0.25);
+  }
+  .upsell-price-note {
+    font-size: 12px;
+    color: #747a86;
+    margin-top: 4px;
+  }
+  /* ── REDESIGNED ACTION CARD ── */
+  .action-card {
+    page-break-before: always;
+    break-before: always;
+    background: linear-gradient(160deg, #fffdf7 0%, #fdf6e3 100%);
+    border: 1.5px solid rgba(201,154,58,0.30);
+    border-radius: 20px;
+    padding: 40px 36px;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(201,154,58,0.14), 0 2px 8px rgba(20,21,26,0.05);
+  }
+  .action-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #a67922, #d4a017, #f3cf74, #d4a017, #a67922);
+  }
+  .action-card-icon { font-size: 36px; margin-bottom: 12px; }
+  .action-card-headline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #14151a;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .action-card-sub {
+    font-size: 13.5px;
+    color: #343843;
+    max-width: 460px;
+    margin: 0 auto 22px;
+    line-height: 1.65;
+  }
+  .action-card-sub strong { color: #14151a; }
+  .action-btn-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .action-btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(160deg, #FFD000, #F5A800 50%, #E08C00);
+    color: #1A0F00;
+    font-size: 13px;
+    font-weight: 900;
+    padding: 14px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    box-shadow: 0 4px 18px rgba(245,168,0,0.45), inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .action-btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.9);
+    border: 1.5px solid rgba(201,154,58,0.45);
+    border-radius: 999px;
+    padding: 14px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #14151a;
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(201,154,58,0.12);
+  }
+
 </style>
 </head>
 <body>
@@ -1336,7 +1489,7 @@
     </div>
   </div>
   <div class="report-meta">
-    <div class="report-type">₹{{ tier }} Privacy Scan — Photo{% if tier == "998" %} Deep Dive{% else %} Report{% endif %}</div>
+    <div class="report-type">₹298 Privacy Scan — Photo Report</div>
     <div class="report-date">{{ report_date }}</div>
   </div>
 </div>
@@ -1348,7 +1501,7 @@
 <div class="hero">
   <div class="hero-subject">Photo Scanned</div>
   <div style="margin: 12px auto 16px; width: 150px; height: 150px; border-radius: 12px; overflow: hidden; border: 3px solid var(--gold-light); box-shadow: 0 4px 16px rgba(184,134,11,0.18);">
-    <img src="{{ submitted_photo_url }}" alt="Your Photo" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <img src="{{ user_photo_url }}" alt="Your Photo" style="width:100%;height:100%;object-fit:cover;display:block;">
   </div>
   <div class="hero-headline">
     Our team searched the internet for photos linked to your identity.<br>
@@ -1388,7 +1541,7 @@
 <!-- NARRATIVE -->
 <div class="narrative-box">
   <div class="narrative-label">Our Finding</div>
-  <div class="narrative-text">{{ narrative }}</div>
+  <div class="narrative-text">{{ photo_summary }}</div>
 </div>
 
 <!-- INFO NOTE -->
@@ -1419,18 +1572,10 @@
     </div>
     <div class="photo-card-body">
       <div class="photo-card-num">Photo {{ forloop.index }} of {{ photo_count }}</div>
-      {% if tier == "998" %}
-      <div class="photo-card-platform">{{ photo.site_name }}</div>
-      <div class="photo-card-url"><a href="{{ photo.url }}" target="_blank">{{ photo.url }}</a></div>
-      {% if photo.notes != "" %}
-      <div class="photo-card-notes">{{ photo.notes }}</div>
-      {% endif %}
-      {% else %}
       <div class="photo-card-platform">
         <span class="text-blur">platform-name-hidden.com</span>
       </div>
       <div class="photo-card-url text-blur">https://████████████████████████</div>
-      {% endif %}
     </div>
   </div>
   {% endfor %}
@@ -1438,7 +1583,6 @@
 
 <div class="gold-divider"></div>
 
-{% if tier == "298" %}
 <!-- UPSELL -->
 <div class="upsell-card" style="page-break-before:always;break-before:always;">
   <div class="upsell-eyebrow">⭐ Upgrade to Deep Dive — ₹998</div>
@@ -1457,16 +1601,22 @@
   <div class="upsell-price-note">One-time payment · No subscription · Report delivered within 48 hours</div>
 </div>
 
-<!-- SECONDARY CTAs -->
-<div class="cta-row">
-  <a href="https://www.scanmyshadow.com/#embed06" class="btn-secondary">
-    <span class="btn-icon">🔍</span>
-    Scan a New Number or Email
-  </a>
-  <a href="https://app.scanmyshadow.com/maya-standalone.html?id={{ scan_id }}" class="btn-secondary">
-    <span class="btn-icon">💬</span>
-    Chat with Maya — Ask Questions
-  </a>
+<div class="action-card">
+  <div class="action-card-icon">🔍</div>
+  <div class="action-card-headline">Scan Someone Else Now</div>
+  <div class="action-card-sub">
+    Your privacy is clear — but what about the people closest to you?<br>
+    Run a scan on a family member, partner, or friend.<br>
+    <strong>Your next suggested rescan: {{ next_scan_date }}</strong>
+  </div>
+  <div class="action-btn-row">
+    <a href="https://www.scanmyshadow.com/#embed06" class="action-btn-primary">
+      🔍 Start a New Scan
+    </a>
+    <a href="https://app.scanmyshadow.com/maya-standalone.html?id={{ scan_id }}" class="action-btn-secondary">
+      💬 Chat with Maya
+    </a>
+  </div>
 </div>
 
 <div class="gold-divider"></div>
@@ -1518,82 +1668,15 @@
     <div class="tip-title">Upgrade to Deep Dive for exact locations and removal steps</div>
     <div class="tip-body">General tips can only do so much. To get your specific photos taken down, you need to know exactly where they are. The Deep Dive gives you that — and tells you how to remove each one.</div>
   </div>
-</div>
-
-{% else %}
-
-<!-- SECONDARY CTAs (998) -->
-<div class="cta-row">
-  <a href="https://www.scanmyshadow.com/#embed06" class="btn-secondary">
-    <span class="btn-icon">🔍</span>
-    Scan a New Number or Email
-  </a>
-  <a href="https://app.scanmyshadow.com/maya-standalone.html?id={{ scan_id }}" class="btn-secondary">
-    <span class="btn-icon">💬</span>
-    Chat with Maya — Ask Questions
-  </a>
-</div>
-
-<div class="gold-divider"></div>
-
-<!-- PERSONALISED REMOVAL TOOLKIT (998) -->
-<div class="guide-section" style="page-break-before:always;break-before:always;">
-  <div class="guide-section-header" style="page-break-after:avoid;break-after:avoid;">
-    <div class="guide-section-title">Your Personalised Removal Toolkit</div>
-    <div class="guide-section-sub">Steps to get each photo taken down — based on where it was found.</div>
-  </div>
-
-  {{ removal_toolkit }}
 
   <div class="guide-section-header" style="margin-top:32px;page-break-after:avoid;break-after:avoid;">
-    <div class="guide-section-title">Protect Yourself — Steps to Take Now</div>
-    <div class="guide-section-sub">General precautions to reduce your photo exposure going forward.</div>
+    <div class="guide-section-title">Personalised Tips Based on Your Scan</div>
+    <div class="guide-section-sub">General steps tailored to what our team found — upgrade to Deep Dive for exact platform details.</div>
   </div>
-
-  <div class="tip-card no-break">
-    <div class="tip-num">Tip 01</div>
-    <div class="tip-title">Do a reverse image search yourself</div>
-    <div class="tip-body">Go to Google Images (images.google.com) and drag your photo to search. This gives you a quick idea of how widely your photo has spread across the internet.</div>
+  <div style="filter:blur(4px);user-select:none;pointer-events:none;">
+    {{ removal_toolkit }}
   </div>
-  <div class="tip-card no-break">
-    <div class="tip-num">Tip 02</div>
-    <div class="tip-title">Set all your social media accounts to private</div>
-    <div class="tip-body">Change your Instagram, Facebook, and Snapchat to private immediately. This stops new scrapers from indexing your photos going forward.</div>
-  </div>
-  <div class="tip-card no-break">
-    <div class="tip-num">Tip 03</div>
-    <div class="tip-title">Remove profile photos from public directories</div>
-    <div class="tip-body">Truecaller, LinkedIn, and other apps often display your profile photo publicly. Review and remove or restrict photos on any platform you don't actively use.</div>
-  </div>
-  <div class="tip-card no-break">
-    <div class="tip-num">Tip 04</div>
-    <div class="tip-title">Avoid posting new photos publicly until this is resolved</div>
-    <div class="tip-body">Pause public photo posting temporarily. Once you know where your photos are and get them removed, you can resume — but with stricter privacy settings.</div>
-  </div>
-  <div class="tip-card no-break">
-    <div class="tip-num">Tip 05</div>
-    <div class="tip-title">Check Google's "Results about you" tool</div>
-    <div class="tip-body">Visit myaccount.google.com → Data & Privacy → Results about you. Google lets you request removal of personal photos from search results directly.</div>
-  </div>
-  <div class="tip-card no-break">
-    <div class="tip-num">Tip 06</div>
-    <div class="tip-title">Document everything before reporting</div>
-    <div class="tip-body">Before you report or request removal, take screenshots of the pages where your photos appear. Platforms sometimes remove the content before you can document it — always capture evidence first.</div>
-  </div>
-  <div class="tip-card no-break">
-    <div class="tip-num">Tip 07</div>
-    <div class="tip-title">Report fake profiles using the platform's built-in tools</div>
-    <div class="tip-body">Most platforms (Instagram, Facebook, LinkedIn) have a "Report" button. Use it to flag impersonation or unauthorised use of your photo. This is free and often works faster than legal routes.</div>
-  </div>
-  <div class="tip-card no-break">
-    <div class="tip-num">Tip 08</div>
-    <div class="tip-title">Scan again in 90 days</div>
-    <div class="tip-body">New photos can appear online at any time. Schedule a follow-up scan in 90 days to check if your situation has changed.</div>
-  </div>
-
 </div>
-
-{% endif %}
 
 <!-- FOOTER -->
 <div class="report-footer">
