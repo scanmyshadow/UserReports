@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScanMyShadow — Phone Scan Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #FFFFFF;
+    --cream: #FDFBF7;
+    --ink: #111118;
+    --ink-soft: #3D3D4E;
+    --ink-muted: #7A7A8C;
+    --gold: #B8860B;
+    --gold-bright: #D4A017;
+    --gold-light: #F5E6B8;
+    --gold-pale: #FDF6E3;
+    --red: #C0392B;
+    --red-pale: #FDF0EE;
+    --amber: #D35400;
+    --amber-pale: #FEF5ED;
+    --green: #1A7A4A;
+    --green-pale: #EDF7F2;
+    --border: #E8E2D5;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-md: 0 8px 32px rgba(0,0,0,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body { max-width: 860px; margin: 0 auto; padding: 32px 24px 60px; }
+
+  /* HEADER */
+  .report-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; margin-bottom: 32px; border-bottom: 2px solid var(--border); position: relative; }
+  .report-header::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 120px; height: 2px; background: linear-gradient(90deg, var(--gold-bright), transparent); }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand img { width: 48px; height: 48px; border-radius: 12px; border: 1px solid var(--gold-light); box-shadow: var(--shadow-sm); object-fit: cover; }
+  .brand-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--ink); letter-spacing: -0.02em; }
+  .brand-name span { color: var(--gold); }
+  .report-meta { text-align: right; }
+  .report-type { font-size: 13px; font-weight: 700; color: var(--ink); letter-spacing: 0.04em; text-transform: uppercase; }
+  .report-date { font-size: 11.5px; color: var(--ink-muted); margin-top: 3px; font-weight: 500; }
+
+  /* CONFIDENTIAL */
+  .confidential-bar { background: var(--gold-pale); border: 1px solid var(--gold-light); border-radius: 8px; padding: 9px 16px; margin-bottom: 28px; display: flex; align-items: center; gap: 10px; font-size: 11.5px; color: var(--gold); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+  .confidential-bar::before { content: '🔐'; font-size: 14px; }
+
+  /* HERO */
+  .hero { background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--gold-bright); border-radius: 16px; padding: 36px 32px 32px; margin-bottom: 24px; box-shadow: var(--shadow-md); text-align: center; }
+  .hero-subject { font-size: 13px; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .hero-phone { font-family: 'DM Sans', sans-serif; font-size: 28px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.02em; }
+  .hero-headline { font-size: 15px; color: var(--ink-soft); max-width: 520px; margin: 0 auto 24px; line-height: 1.65; }
+  .hero-headline strong { color: var(--ink); font-weight: 700; }
+  .severity-badge { display: inline-flex; align-items: center; gap: 7px; padding: 8px 20px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 28px; }
+  .severity-badge.high { background: var(--red-pale); color: var(--red); border: 1.5px solid rgba(192,57,43,0.25); }
+  .severity-badge.medium { background: var(--amber-pale); color: var(--amber); border: 1.5px solid rgba(211,84,0,0.22); }
+  .severity-badge.low { background: var(--green-pale); color: var(--green); border: 1.5px solid rgba(26,122,74,0.22); }
+  .severity-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .severity-badge.high .severity-dot { background: var(--red); }
+  .severity-badge.medium .severity-dot { background: var(--amber); }
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px; }
+  .stat-card { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; padding: 18px 12px; text-align: center; }
+  .stat-card.accent { border-color: var(--gold-light); background: var(--gold-pale); }
+  .stat-card.danger { border-color: rgba(192,57,43,0.20); background: var(--red-pale); }
+  .stat-number { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; line-height: 1; margin-bottom: 6px; color: var(--ink); }
+  .stat-card.accent .stat-number { color: var(--gold); }
+  .stat-card.danger .stat-number { color: var(--red); }
+  .stat-label { font-size: 11px; font-weight: 600; color: var(--ink-muted); letter-spacing: 0.04em; text-transform: uppercase; }
+
+  /* NARRATIVE */
+  .narrative-box { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold-bright); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+  .narrative-label { font-size: 10.5px; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .narrative-text { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
+
+  /* INFO NOTE */
+  .info-note { background: #F4F6FF; border: 1px solid rgba(70,90,200,0.14); border-radius: 10px; padding: 14px 18px; margin-bottom: 24px; display: flex; gap: 12px; align-items: flex-start; }
+  .info-note-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .info-note-body { font-size: 13px; color: var(--ink-soft); line-height: 1.65; }
+  .info-note-body strong { color: var(--ink); }
+
+  /* SECTION */
+  .section { background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
+  .section-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; border-bottom: 1px solid var(--border); background: var(--cream); }
+  .section-title-group { display: flex; align-items: center; gap: 10px; }
+  .section-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--gold-pale); border: 1px solid var(--gold-light); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--ink); }
+  .section-subtitle { font-size: 12px; color: var(--ink-muted); margin-top: 2px; font-weight: 500; }
+  .section-count { font-size: 12px; font-weight: 700; color: var(--gold); background: var(--gold-pale); border: 1px solid var(--gold-light); padding: 4px 12px; border-radius: 999px; }
+  .section-count.danger { color: var(--red); background: var(--red-pale); border-color: rgba(192,57,43,0.20); }
+  .section-body { padding: 20px 24px; }
+
+  /* DIGITAL SHADOW */
+  .shadow-section { background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
+  .shadow-strip { padding: 14px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 14px; }
+  .shadow-strip:last-child { border-bottom: none; }
+  .shadow-strip-label { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--gold); flex: 0 0 110px; padding-top: 2px; }
+  .shadow-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .shadow-pill { font-size: 12px; color: var(--ink); background: var(--cream); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-weight: 500; }
+  .shadow-pill.icon-pill { display: flex; align-items: center; gap: 6px; padding: 4px 10px 4px 6px; }
+  .shadow-kv { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+  .shadow-kv-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; line-height: 1.5; }
+  .shadow-kv-label { font-size: 10.5px; font-weight: 700; color: var(--gold); letter-spacing: 0.05em; text-transform: uppercase; flex: 0 0 110px; padding-top: 1px; }
+  .shadow-kv-value { color: var(--ink-soft); word-break: break-all; }
+
+  /* PLATFORM ROWS */
+  .platform-row { display: grid; grid-template-columns: 42px minmax(120px, 170px) 1fr; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--border); gap: 14px; page-break-inside: avoid; break-inside: avoid; }
+  .platform-row:last-child { border-bottom: none; }
+  .platform-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--white); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: var(--shadow-sm); overflow: hidden; }
+  .platform-icon img { width: 26px; height: 26px; object-fit: contain; display: block; }
+  .platform-name { font-size: 14px; font-weight: 700; color: var(--ink); padding-top: 8px; }
+  .platform-detail-wrap { flex: 1; position: relative; }
+  .platform-summary { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+  .evidence-chip { font-size: 10.5px; color: var(--ink-soft); background: var(--cream); border: 1px solid var(--border); border-radius: 5px; padding: 3px 7px; line-height: 1.35; }
+  .evidence-chip strong { color: var(--gold); font-size: 9.5px; letter-spacing: 0.04em; text-transform: uppercase; margin-right: 3px; }
+  .platform-evidence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 10px; padding: 10px 12px; background: var(--cream); border: 1px solid var(--border); border-radius: 8px; }
+  .evidence-row { min-width: 0; font-size: 11.5px; line-height: 1.45; }
+  .evidence-label { display: block; font-size: 9.5px; font-weight: 700; color: var(--gold); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1px; }
+  .evidence-value { color: var(--ink-soft); word-break: break-word; }
+
+  /* BREACH ROWS */
+  .breach-row { display: grid; grid-template-columns: 8px minmax(130px, 190px) 1fr; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--border); gap: 14px; page-break-inside: avoid; break-inside: avoid; }
+  .breach-row:last-child { border-bottom: none; }
+  .breach-sev { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 14px; }
+  .breach-sev.high { background: var(--red); }
+  .breach-sev.medium { background: var(--amber); }
+  .breach-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .breach-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .breach-meta span { font-size: 10.5px; color: var(--ink-muted); background: var(--cream); border: 1px solid var(--border); border-radius: 5px; padding: 2px 7px; }
+  .breach-content { min-width: 0; }
+  .breach-description { font-size: 12px; color: var(--ink-soft); margin-bottom: 6px; line-height: 1.6; }
+  .breach-data-list { display: flex; flex-wrap: wrap; gap: 4px; }
+  .breach-data-list span { font-size: 10px; background: var(--red-pale); color: var(--red); border: 1px solid rgba(192,57,43,0.15); border-radius: 4px; padding: 2px 7px; font-weight: 500; }
+  .breach-sev-badge { font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; letter-spacing: 0.04em; text-transform: uppercase; flex-shrink: 0; }
+  .breach-sev-badge.high { background: var(--red-pale); color: var(--red); }
+  .breach-sev-badge.medium { background: var(--amber-pale); color: var(--amber); }
+  .breach-sev-badge.low { background: var(--green-pale); color: var(--green); }
+
+  /* TIMELINE */
+  .timeline-section { background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
+  .timeline-headline-box { padding: 24px; text-align: center; border-bottom: 1px solid var(--border); background: var(--cream); }
+  .timeline-headline-number { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+  .timeline-headline-text { font-size: 14px; color: var(--ink-soft); font-weight: 500; }
+  .timeline-fake-row { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .timeline-fake-row:last-child { border-bottom: none; }
+  .tl-date { font-weight: 700; font-size: 11px; color: var(--gold); width: 72px; flex-shrink: 0; }
+  .tl-source { font-size: 12px; font-weight: 600; color: var(--ink); width: 110px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tl-content { font-size: 11.5px; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* DIVIDER */
+  .gold-divider { height: 1px; margin: 28px 0; background: linear-gradient(90deg, transparent, var(--gold-bright), var(--gold-light), transparent); }
+
+  /* SOURCES */
+  .source-chip { display: flex; align-items: center; gap: 7px; background: var(--cream); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; }
+  .source-chip img { width: 18px; height: 18px; object-fit: contain; flex-shrink: 0; }
+  .source-chip-name { font-size: 11.5px; color: var(--ink-soft); font-weight: 500; }
+
+  /* CTAs */
+  .cta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 32px; }
+  .btn-secondary { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--white); border: 1.5px solid var(--gold-bright); border-radius: 12px; padding: 14px 18px; font-size: 13px; font-weight: 700; color: var(--ink); text-decoration: none; box-shadow: 0 2px 10px rgba(184,134,11,0.14), var(--shadow-sm); }
+  .btn-secondary .btn-icon { font-size: 16px; }
+
+  /* GUIDE / REMOVAL TOOLKIT */
+  .guide-section { margin-top: 32px; }
+  .guide-section-header { border-left: 4px solid var(--gold-bright); padding: 14px 18px; background: var(--gold-pale); border-radius: 0 10px 10px 0; margin-bottom: 18px; }
+  .guide-section-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+  .guide-section-sub { font-size: 12.5px; color: var(--ink-soft); }
+  .tip-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; margin-bottom: 10px; box-shadow: var(--shadow-sm); page-break-inside: avoid; break-inside: avoid; }
+  .tip-num { font-size: 10px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .tip-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+  .tip-body { font-size: 12.5px; color: var(--ink-soft); line-height: 1.65; }
+  .tip-body ol { padding-left: 18px; margin-top: 4px; }
+  .tip-body ol li { margin-bottom: 5px; }
+
+  /* FOOTER */
+  .report-footer { border-top: 1px solid var(--border); padding-top: 20px; text-align: center; }
+  .footer-text { font-size: 11px; color: rgba(17,17,24,0.72); line-height: 1.7; }
+  .footer-id { font-size: 10px; color: rgba(17,17,24,0.63); margin-top: 6px; font-family: 'Courier New', monospace; letter-spacing: 0.04em; }
+
+  /* PAGE BREAKS */
+  .page-break { page-break-after: always; break-after: always; }
+  .no-break { page-break-inside: avoid; break-inside: avoid; }
+
+  @media print {
+    body { background: white; padding: 0; }
+    @page { margin: 24px; }
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 16px 14px 40px; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    .stat-row .stat-card:last-child { grid-column: 1/-1; }
+    .cta-row { grid-template-columns: 1fr; }
+    .hero { padding: 24px 20px; }
+    .section-body { padding: 16px; }
+    .platform-row { grid-template-columns: 42px 1fr; }
+    .platform-name { padding-top: 0; }
+    .platform-detail-wrap { grid-column: 1/-1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="report-header">
+  <div class="brand">
+    <img src="{{ brand_logo_uri }}" alt="ScanMyShadow" onerror="this.style.background='#F5E6B8';this.style.borderRadius='12px'">
+    <div>
+      <div class="brand-name">Scan<span>My</span>Shadow</div>
+    </div>
+  </div>
+  <div class="report-meta">
+    <div class="report-type">₹998 Privacy Scan — Phone Deep Dive</div>
+    <div class="report-date">{{ report_date }}</div>
+  </div>
+</header>
+
+<!-- CONFIDENTIAL -->
+<div class="confidential-bar">Confidential &nbsp;·&nbsp; Do not share</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-subject">Phone Number Scanned</div>
+  <div class="hero-phone">{{ phone_number }}</div>
+  <div class="hero-headline">We searched the entire internet for your phone number.<br><strong>Here is what we found.</strong></div>
+  {% if breach_count == 0 %}
+  <div class="severity-badge low">Low Risk — No Data Breaches Found</div>
+  {% elsif breach_count == 1 %}
+  <div class="severity-badge medium"><span class="severity-dot"></span>Medium Risk — Attention Recommended</div>
+  {% else %}
+  <div class="severity-badge high"><span class="severity-dot"></span>High Risk — Immediate Attention Needed</div>
+  {% endif %}
+  <div class="stat-row">
+    <div class="stat-card accent"><div class="stat-number">{{ platform_count }}</div><div class="stat-label">Platforms Found</div></div>
+    <div class="stat-card danger"><div class="stat-number">{{ breach_count }}</div><div class="stat-label">Data Breaches</div></div>
+    <div class="stat-card"><div class="stat-number">{{ years_of_history }}</div><div class="stat-label">Years of History</div></div>
+  </div>
+</div>
+
+<!-- NARRATIVE -->
+<div class="narrative-box">
+  <div class="narrative-label">Our Finding</div>
+  <div class="narrative-text">{{ narrative }}</div>
+</div>
+
+<!-- INFO NOTE -->
+<div class="info-note">
+  <div class="info-note-icon">ℹ️</div>
+  <div class="info-note-body"><strong>A note before you continue.</strong> Not every result is a red flag. Platforms you use daily — WhatsApp, Truecaller, Google — will always appear. Pay attention to <strong>entries from services you don't recognise or no longer use.</strong> Those are the ones that matter most.</div>
+</div>
+
+<!-- DIGITAL SHADOW -->
+<div class="shadow-section" style="page-break-before:always;break-before:always;">
+  <div class="section-header">
+    <div class="section-title-group">
+      <div class="section-icon">🪞</div>
+      <div>
+        <div class="section-title">Your Digital Shadow</div>
+        <div class="section-subtitle">Identity data found linked to this phone number</div>
+      </div>
+    </div>
+    <div class="section-count">{{ identity_count }} attributes</div>
+  </div>
+
+  <!-- Scan Stats -->
+  <div style="padding:12px 24px;background:var(--cream);border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:6px 20px;">
+    <span style="font-size:10px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--gold);flex:0 0 100%;margin-bottom:2px;">Scan Stats</span>
+    <span style="font-size:11.5px;color:var(--ink-soft);"><strong style="color:var(--gold);">{{ stats.registered_modules }}</strong> platforms registered</span>
+    <span style="font-size:11.5px;color:var(--ink-soft);"><strong style="color:var(--red);">{{ stats.breached_modules }}</strong> breach sources checked</span>
+    <span style="font-size:11.5px;color:var(--ink-soft);"><strong style="color:var(--ink);">{{ stats.caller_id_entries }}</strong> caller ID entries</span>
+    <span style="font-size:11.5px;color:var(--ink-soft);"><strong style="color:var(--ink);">{{ stats.unique_names }}</strong> name variants</span>
+    <span style="font-size:11.5px;color:var(--ink-soft);"><strong style="color:var(--ink);">{{ stats.unique_usernames }}</strong> username variants</span>
+    <span style="font-size:11.5px;color:var(--ink-soft);"><strong style="color:var(--ink);">{{ stats.total_events }}</strong> timeline events</span>
+  </div>
+
+  <!-- Names -->
+  <div class="shadow-strip">
+    <div class="shadow-strip-label">Names Found</div>
+    <div class="shadow-pills">{% for name in identity_names %}<div class="shadow-pill">{{ name }}</div>{% endfor %}</div>
+  </div>
+
+  <!-- Usernames -->
+  {% if identity_usernames.size > 0 %}
+  <div class="shadow-strip">
+    <div class="shadow-strip-label">Usernames</div>
+    <div class="shadow-pills">{% for username in identity_usernames %}<div class="shadow-pill">{{ username }}</div>{% endfor %}</div>
+  </div>
+  {% endif %}
+
+  <!-- Caller ID Entries -->
+  {% if caller_id_entries.size > 0 %}
+  <div class="shadow-strip" style="page-break-inside:avoid;break-inside:avoid;">
+    <div class="shadow-strip-label">Caller ID</div>
+    <div class="shadow-kv">
+      {% for entry in caller_id_entries %}
+      <div class="shadow-kv-row">
+        <span class="shadow-kv-label">{{ entry.app_name }}</span>
+        <span class="shadow-kv-value">{% if entry.display_name != "" %}{{ entry.display_name }}{% endif %}{% if entry.tag != "" %} · <em>{{ entry.tag }}</em>{% endif %}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Account Hints -->
+  {% if account_hints.size > 0 %}
+  <div class="shadow-strip" style="page-break-inside:avoid;break-inside:avoid;">
+    <div class="shadow-strip-label">Account Hints</div>
+    <div class="shadow-kv">
+      {% for hint in account_hints %}
+      <div class="shadow-kv-row">
+        <span class="shadow-kv-label">{{ hint.source }}</span>
+        <span class="shadow-kv-value">{{ hint.value }}{% if hint.explain != "" %} — <em style="color:var(--ink-muted);">{{ hint.explain }}</em>{% endif %}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Also On -->
+  {% if also_registered.size > 0 %}
+  <div class="shadow-strip" style="page-break-inside:avoid;break-inside:avoid;">
+    <div class="shadow-strip-label">Also On</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;">
+      {% for item in also_registered %}
+      <div class="shadow-pill icon-pill">
+        <img src="https://www.google.com/s2/favicons?domain={{ item | downcase | remove: ' ' }}.com&sz=32" alt="{{ item }}" style="width:16px;height:16px;object-fit:contain;" onerror="this.style.display='none'">
+        {{ item }}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<!-- PLATFORMS — Where Your Number Was Found -->
+<div class="section" style="page-break-before:always;break-before:always;">
+  <div class="section-header">
+    <div class="section-title-group">
+      <div class="section-icon">📱</div>
+      <div>
+        <div class="section-title">Where Your Number Was Found</div>
+        <div class="section-subtitle">Apps and websites that have your phone number</div>
+      </div>
+    </div>
+    <div class="section-count">{{ platform_count }} found</div>
+  </div>
+  <div class="section-body">
+    {% for platform in platforms %}
+    <div class="platform-row">
+      <div class="platform-icon">
+        <img src="{{ platform.logo_uri }}" alt="{{ platform.name }}" width="26" height="26" style="object-fit:contain;border-radius:3px;" onerror="this.style.display='none'">
+      </div>
+      <div class="platform-name">{{ platform.name }}</div>
+      <div class="platform-detail-wrap">
+        <div class="platform-summary">
+          {% for field in platform.fields %}{% if forloop.index <= 4 %}<span class="evidence-chip"><strong>{{ field.label }}</strong>{{ field.value }}</span>{% endif %}{% endfor %}
+        </div>
+        <div class="platform-evidence">
+          {% for field in platform.fields %}
+          <div class="evidence-row"><span class="evidence-label">{{ field.label }}</span><span class="evidence-value">{{ field.value }}</span></div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- BREACHES -->
+<div class="section" style="page-break-before:always;break-before:always;">
+  <div class="section-header">
+    <div class="section-title-group">
+      <div class="section-icon">⚠️</div>
+      <div>
+        <div class="section-title">Data Breaches</div>
+        <div class="section-subtitle">Your data was leaked in these incidents</div>
+      </div>
+    </div>
+    <div class="section-count danger">{{ breach_count }} found</div>
+  </div>
+  <div class="section-body">
+    {% for breach in breaches %}
+    <div class="breach-row">
+      <div class="breach-sev {{ breach.severity }}"></div>
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <div style="width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;"><img src="{{ breach.logo_uri }}" alt="{{ breach.name }}" style="width:20px;height:20px;object-fit:contain;" onerror="this.style.display='none'"></div>
+        <div>
+          <div class="breach-name">{{ breach.name }}</div>
+          <div class="breach-meta">
+            <span>{{ breach.date }}</span>
+            <span>{{ breach.records }} records</span>
+            <span class="breach-sev-badge {{ breach.severity }}">{% if breach.severity == "high" %}High Risk{% elsif breach.severity == "medium" %}Medium Risk{% else %}Low Risk{% endif %}</span>
+          </div>
+        </div>
+      </div>
+      <div class="breach-content">
+        <div class="breach-description">{{ breach.description }}{% if breach.website != "" %} <span style="color:var(--ink-muted);">Website: {{ breach.website }}</span>{% endif %}</div>
+        {% if breach.breached_data.size > 0 %}
+        <div class="breach-data-list">{% for bd in breach.breached_data %}<span>{{ bd }}</span>{% endfor %}</div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+    {% if breach_count == 0 %}
+    <div style="padding:16px 0 6px;text-align:center;">
+      <div style="font-size:13px;color:var(--green);font-weight:700;margin-bottom:4px;">✓ No breaches found on record</div>
+      <div style="font-size:12px;color:var(--ink-muted);line-height:1.6;">Your phone number was not found in any known data breach databases. Breaches can take months to surface, so a clean result today does not guarantee one tomorrow.</div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline-section" style="page-break-before:always;break-before:always;">
+  <div class="section-header">
+    <div class="section-title-group">
+      <div class="section-icon">🕐</div>
+      <div>
+        <div class="section-title">Your Digital Timeline</div>
+        <div class="section-subtitle">A history of where your phone data has appeared</div>
+      </div>
+    </div>
+  </div>
+  <div class="timeline-headline-box">
+    <div class="timeline-headline-number">{{ years_of_history }} years</div>
+    <div class="timeline-headline-text">Your phone number has been active online since <strong>{{ earliest_year }}</strong> — that is {{ total_events }} events we tracked across different platforms.</div>
+  </div>
+  {% if year_groups.size > 0 %}
+  <div style="padding:16px 24px 0;">
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Activity by Year</div>
+    {% assign max_count = 1 %}
+    {% for yg in year_groups %}{% if yg.count > max_count %}{% assign max_count = yg.count %}{% endif %}{% endfor %}
+    <div style="display:flex;align-items:flex-end;gap:6px;height:64px;">
+      {% for yg in year_groups %}
+      {% assign bar_pct = yg.count | times: 100 | divided_by: max_count %}
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
+        <div style="font-size:8.5px;color:var(--ink-muted);font-weight:600;">{{ yg.count }}</div>
+        <div style="width:100%;background:var(--gold-bright);border-radius:3px 3px 0 0;height:{{ bar_pct | times: 44 | divided_by: 100 | plus: 4 }}px;min-height:4px;"></div>
+        <div style="font-size:8px;color:var(--ink-muted);font-weight:500;writing-mode:vertical-rl;transform:rotate(180deg);height:26px;line-height:1;">{{ yg.year }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  <div style="padding:16px 24px;">
+    {% for event in events %}
+    <div class="timeline-fake-row">
+      <div class="tl-date">{{ event.date }}</div>
+      <div class="tl-source">{{ event.source }}</div>
+      <div class="tl-content">{{ event.content }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="gold-divider"></div>
+
+<!-- SOURCES CHECKED -->
+<div class="section" style="margin-bottom:20px;page-break-before:always;break-before:always;">
+  <div class="section-header">
+    <div class="section-title-group">
+      <div class="section-icon">🔍</div>
+      <div>
+        <div class="section-title">Sources Checked</div>
+        <div class="section-subtitle">Every database and platform we scanned</div>
+      </div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div style="display:flex;flex-wrap:wrap;gap:7px;align-items:center;">
+      {% for src in sources_with_logos %}
+      <div class="source-chip">
+        {% if src.locked %}<span style="font-size:12px;">🔓</span>{% else %}<img src="{{ src.logo_uri }}" alt="{{ src.name }}" style="width:18px;height:18px;object-fit:contain;">{% endif %}
+        <span class="source-chip-name">{{ src.name }}</span>
+      </div>
+      {% endfor %}
+      <div style="font-size:11.5px;color:var(--ink-muted);font-style:italic;padding:5px 4px;">+ many more</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTAs -->
+<div class="cta-row">
+  <a href="https://www.scanmyshadow.com/#embed06" class="btn-secondary"><span class="btn-icon">🔍</span>Scan a New Number or Email</a>
+  <a href="https://app.scanmyshadow.com/maya-standalone.html?id={{ scan_id }}" class="btn-secondary"><span class="btn-icon">💬</span>Chat with Maya — Ask Questions</a>
+</div>
+
+<div class="gold-divider"></div>
+
+<!-- REMOVAL TOOLKIT + PRIVACY GUIDE -->
+<div class="guide-section" style="page-break-before:always;break-before:always;">
+  <div class="guide-section-header" style="page-break-after:avoid;break-after:avoid;">
+    <div class="guide-section-title">Your Personalised Removal Toolkit</div>
+    <div class="guide-section-sub">Step-by-step actions specific to your scan results.</div>
+  </div>
+  {{ removal_toolkit }}
+
+  <div class="guide-section-header" style="margin-top:32px;page-break-before:always;break-before:always;">
+    <div class="guide-section-title">Your Privacy Protection Guide</div>
+    <div class="guide-section-sub">Steps to take right now to reduce your exposure.</div>
+  </div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 01</div><div class="tip-title">Change your phone-linked account passwords immediately</div><div class="tip-body">Start with your bank, UPI apps (PhonePe, GPay, Paytm), and email. Your phone number is often used for OTP-based login — if it is leaked, these accounts are at risk.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 02</div><div class="tip-title">Turn on two-factor authentication (2FA)</div><div class="tip-body">Enable 2FA on all major apps — even with a leaked number, a second verification step blocks unauthorised access. Use an authenticator app where possible, not just SMS.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 03</div><div class="tip-title">Watch out for SIM swap fraud</div><div class="tip-body">Scammers can call your telecom operator and transfer your number to a new SIM — then receive your OTPs. Call your operator (Jio, Airtel, Vi) and ask to lock your SIM against swaps.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 04</div><div class="tip-title">Do not answer calls from unknown or international numbers</div><div class="tip-body">Once your number is in breach databases, it gets sold to scammers. Calls from +1, +44, +92 with urgent messages about bank accounts or parcels are almost always fraud.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 05</div><div class="tip-title">Check which apps are linked to your phone number</div><div class="tip-body">Go through your apps — food delivery, travel, shopping — and remove your number from any app you no longer use. The fewer places it appears, the safer you are.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 06</div><div class="tip-title">Use a separate number for app registrations</div><div class="tip-body">Consider getting a second SIM or using a virtual number just for signing up to apps and websites. Keep your primary number private.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 07</div><div class="tip-title">Register on the DND (Do Not Disturb) list</div><div class="tip-body">Text START DND to 1909 or use the TRAI DND app to reduce unsolicited calls and messages. It will not stop all spam, but reduces it significantly.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 08</div><div class="tip-title">Scan again in 90 days</div><div class="tip-body">Breaches are discovered months after they happen. A clean result today does not guarantee clean results tomorrow. Book your next scan at scanmyshadow.com.</div></div>
+</div>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <div class="footer-text">This report was prepared exclusively for the person who submitted this scan. The information above is based on publicly available data sources and known breach databases. ScanMyShadow does not store your personal data beyond 96 hours of scan completion.<br>For support, email us at support@scanmyshadow.com</div>
+  <div class="footer-id">Scan ID: {{ scan_id }} &nbsp;·&nbsp; Next suggested scan: {{ next_scan_date }}</div>
+</div>
+
+</body>
+</html>
