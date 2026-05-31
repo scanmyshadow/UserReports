@@ -168,9 +168,12 @@
   /* Stat row */
   .stat-row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 14px;
     margin-top: 8px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .stat-card {
@@ -708,7 +711,6 @@
   @media (max-width: 600px) {
     body { padding: 16px 14px 40px; }
     .stat-row { grid-template-columns: 1fr 1fr; }
-    .stat-row .stat-card:last-child { grid-column: 1/-1; }
     .cta-row { grid-template-columns: 1fr; }
     .hero { padding: 24px 20px; }
     .upsell-card { padding: 28px 20px; }
@@ -1369,10 +1371,7 @@
       <div class="stat-number">0</div>
       <div class="stat-label">Data Breaches</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-number">{{ years_of_history }}</div>
-      <div class="stat-label">Years Checked</div>
-    </div>
+
   </div>
 </div>
 
@@ -1420,130 +1419,32 @@
     <!-- Source logo grid -->
     <div style="border-top:1px solid var(--border);padding-top:14px;">
       <div style="font-size:9.5px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Sources Checked</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=truecaller.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Truecaller</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Google</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Microsoft</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">LinkedIn</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=zomato.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Zomato</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=amazon.in&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Amazon</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=makemytrip.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">MakeMyTrip</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=dominos.co.in&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Domino's India</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=juspay.in&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">JusPay</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=bigbasket.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">BigBasket</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=naukri.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Naukri</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=paypal.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">PayPal</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=adobe.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Adobe</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=dropbox.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Dropbox</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=soundcloud.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">SoundCloud</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=spotify.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Spotify</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=upwork.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Upwork</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=gravatar.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Gravatar</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=flickr.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Flickr</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <span style="font-size:12px;">🔓</span>
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">TXTBASE</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <span style="font-size:12px;">🔓</span>
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Data Troll</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <span style="font-size:12px;">🔓</span>
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Synthient</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=aliexpress.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">AliExpress</span>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:5px 10px;">
-          <img src="https://www.google.com/s2/favicons?domain=trello.com&sz=32" style="width:16px;height:16px;border-radius:3px;object-fit:cover;" onerror="this.style.display='none'">
-          <span style="font-size:11.5px;color:var(--ink-soft);font-weight:500;">Trello</span>
-        </div>
-
+      <div style="display:flex;flex-wrap:wrap;gap:7px;align-items:center;">
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iMTIiIGZpbGw9IiMwQTdBRkYiLz48dGV4dCB4PSI1IiB5PSIxNyIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmIj5UQzwvdGV4dD48L3N2Zz4=" alt="Truecaller" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Truecaller</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzQyODVGNCIgZD0iTTIyLjU2IDEyLjI1YzAtLjc4LS4wNy0xLjUzLS4yLTIuMjVIMTJ2NC4yNmg1LjkyYy0uMjYgMS4zNS0xLjA0IDIuNDktMi4yMSAzLjI1djIuN2gzLjU3YzIuMDktMS45MyAzLjI4LTQuNzcgMy4yOC03Ljk2eiIvPjxwYXRoIGZpbGw9IiMzNEE4NTMiIGQ9Ik0xMiAyM2MyLjk3IDAgNS40Ni0xIDcuMjgtMi42OWwtMy41Ny0yLjdjLS45OS42Ny0yLjI2IDEuMDctMy43MSAxLjA3LTIuODcgMC01LjMtMS45NC02LjE2LTQuNTVIMi4xOHYyLjg0QzMuOTkgMjAuNTMgNy43IDIzIDEyIDIzeiIvPjxwYXRoIGZpbGw9IiNGQkJDMDUiIGQ9Ik01Ljg0IDE0LjEzYy0uMjItLjY3LS4zNS0xLjM4LS4zNS0yLjEzcy4xMy0xLjQ2LjM1LTIuMTNWNy4wM0gyLjE4QzEuNDMgOC41NSAxIDEwLjIyIDEgMTJzLjQzIDMuNDUgMS4xOCA0Ljk3bDMuNjYtMi44NHoiLz48cGF0aCBmaWxsPSIjRUE0MzM1IiBkPSJNMTIgNS4zOGMxLjYyIDAgMy4wNi41NiA0LjIxIDEuNjRsMy4xNS0zLjE1QzE3LjQ2IDIuMDkgMTQuOTcgMSAxMiAxIDcuNyAxIDMuOTkgMy40NyAyLjE4IDcuMDNsMy42NiAyLjg0Yy44Ni0yLjYxIDMuMjktNC40OSA2LjE2LTQuNDl6Ii8+PC9zdmc+" alt="Google" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Google</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjRjI1MDIyIi8+PHJlY3QgeD0iMTMiIHk9IjEiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzdGQkEwMCIvPjxyZWN0IHg9IjEiIHk9IjEzIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9IiMwMEE0RUYiLz48cmVjdCB4PSIxMyIgeT0iMTMiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgZmlsbD0iI0ZGQjkwMCIvPjwvc3ZnPg==" alt="Microsoft" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Microsoft</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzBBNjZDMiIvPjx0ZXh0IHg9IjMiIHk9IjE4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmYiPmluPC90ZXh0Pjwvc3ZnPg==" alt="LinkedIn" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">LinkedIn</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iI0UyMzc0NCIvPjx0ZXh0IHg9IjQiIHk9IjE3IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmYiPlpPPC90ZXh0Pjwvc3ZnPg==" alt="Zomato" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Zomato</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCAyNCI+PHRleHQgeD0iMCIgeT0iMTgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI0ZGOTkwMCI+YW1hem9uPC90ZXh0Pjwvc3ZnPg==" alt="Amazon" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Amazon</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iI0U4MDAyQiIvPjx0ZXh0IHg9IjIiIHk9IjE3IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmYiPk1NVDwvdGV4dD48L3N2Zz4=" alt="MakeMyTrip" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">MakeMyTrip</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzAwNjQ5MSIvPjx0ZXh0IHg9IjIiIHk9IjE3IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmYiPkRPTTwvdGV4dD48L3N2Zz4=" alt="Domino's India" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Domino's India</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIGZpbGw9IiNGREY2RTMiIHN0cm9rZT0iI0I4ODYwQiIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMyAxMmgxOE0xMiAzYzIuOCAyLjggNC4yIDUuOCA0LjIgOXMtMS40IDYuMi00LjIgOU0xMiAzQzkuMiA1LjggNy44IDguOCA3LjggMTJzMS40IDYuMiA0LjIgOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQjg4NjBCIiBzdHJva2Utd2lkdGg9IjEuMiIvPjwvc3ZnPg==" alt="JusPay" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">JusPay</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzg0QzIyNSIvPjx0ZXh0IHg9IjIiIHk9IjE3IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmYiPkJCPC90ZXh0Pjwvc3ZnPg==" alt="BigBasket" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">BigBasket</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzFGNUVCNSIvPjx0ZXh0IHg9IjIiIHk9IjE3IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmYiPm5hdTwvdGV4dD48L3N2Zz4=" alt="Naukri" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Naukri</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHRleHQgeD0iMCIgeT0iMTgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzAwMzA4NyI+UGF5PC90ZXh0Pjx0ZXh0IHg9IjAiIHk9IjE4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwMDlDREUiIGR4PSIxOSI+UGFsPC90ZXh0Pjwvc3ZnPg==" alt="PayPal" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">PayPal</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0ZGMDAwMCIgZD0iTTEzLjUgMkwyMiAyMkgxNWwtMS41LTRoLTdMNSAyMkgyTDEwLjUgMmgzek0xMiA3bC0yLjUgN2g1TDEyIDd6Ii8+PC9zdmc+" alt="Adobe" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Adobe</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzAwNjFGRiIgZD0iTTYgMkwxIDUuNSA2IDlsNS0zLjVMNiAyek0xOCAybC01IDMuNUwxOCA5bDUtMy41TDE4IDJ6TTEgMTIuNUw2IDE2bDUtMy41LTUtMy41LTUgMy41ek0xMyAxMi41bDUgMy41IDUtMy41LTUtMy41LTUgMy41ek02IDE3LjVMMTEgMjFsNS0zLjUtNS0zLjUtNSAzLjV6Ii8+PC9zdmc+" alt="Dropbox" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Dropbox</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0ZGNTUwMCIgZD0iTTEgMTQuNWMwIDEuNCAxLjEgMi41IDIuNCAyLjVzMi40LTEuMSAyLjQtMi41YzAtLjIgMC0uNC0uMS0uNi4yLjEuNS4xLjcuMSAxLjEgMCAyLS45IDItMnMtLjktMi0yLTJjLS4xIDAtLjMgMC0uNC4xQzUuNyA5IDUuMiA4LjUgNC42IDguNWMtLjQgMC0uOC4yLTEgLjYtLjUtLjMtMS0uNS0xLjYtLjVDMSA4LjYgMCA5LjcgMCAxMWMwIC44LjQgMS41IDEgMnYxLjV6bTQuNSAxLjVIMjJjMS4xIDAgMi0uOSAyLTJzLS45LTItMi0yYy0uMiAwLS40IDAtLjYuMS4xLS4zLjEtLjYuMS0uOSAwLTIuMi0xLjgtNC00LTQtMS4xIDAtMi4xLjQtMi44IDEuMUMxNC4xIDcuNiAxMyA3IDExLjggN2MtMi4yIDAtNCAxLjgtNCA0IDAgLjMgMCAuNi4xLjktLjQtLjEtLjgtLjEtMS40LS4xdjQuMnoiLz48L3N2Zz4=" alt="SoundCloud" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">SoundCloud</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTIiIGZpbGw9IiMxREI5NTQiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTcuOSAxMC45QzE0LjcgOSA5LjM1IDguOCA2LjMgOS43NWMtLjUuMTUtMS0uMTUtMS4xNS0uNi0uMTUtLjUuMTUtMSAuNi0xLjE1IDMuNTUtMS4wNSA5LjQtLjg1IDEzLjEgMS4zNS40NS4yNS42Ljg1LjM1IDEuMy0uMjUuMzUtLjg1LjUtMS4zLjI1em0tLjEgMi44Yy0uMjUuMzUtLjcuNS0xLjA1LjI1LTIuNy0xLjY1LTYuOC0yLjE1LTkuOTUtMS4xNS0uNC4xLS44LS4xLS45LS41LS4xLS40LjEtLjguNS0uOSAzLjY1LTEuMSA4LjE1LS41NSAxMS4yNSAxLjM1LjMuMTUuNDUuNjUuMTUuOTV6bS0xLjIgMi43NWMtLjIuMy0uNTUuNC0uODUuMi0yLjM1LTEuNDUtNS4zLTEuNzUtOC44LS45NS0uMzUuMS0uNjUtLjE1LS43NS0uNDUtLjEtLjM1LjE1LS42NS40NS0uNzUgMy44LS44NSA3LjEtLjUgOS43IDEuMS4zNS4xNS40LjU1LjI1Ljg1eiIvPjwvc3ZnPg==" alt="Spotify" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Spotify</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzE0QTgwMCIvPjx0ZXh0IHg9IjIiIHk9IjE3IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmYiPlVQPC90ZXh0Pjwvc3ZnPg==" alt="Upwork" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Upwork</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTIiIGZpbGw9IiMxRThDQkUiLz48dGV4dCB4PSI2IiB5PSIxNyIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmIj5HPC90ZXh0Pjwvc3ZnPg==" alt="Gravatar" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Gravatar</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjcuNSIgY3k9IjEyIiByPSI0LjUiIGZpbGw9IiNGRjAwODQiLz48Y2lyY2xlIGN4PSIxNi41IiBjeT0iMTIiIHI9IjQuNSIgZmlsbD0iIzAwNjNEQyIvPjwvc3ZnPg==" alt="Flickr" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Flickr</span></div>
+        <div class="source-chip"><span style="font-size:12px;">🔓</span><span class="source-chip-name">TXTBASE</span></div>
+        <div class="source-chip"><span style="font-size:12px;">🔓</span><span class="source-chip-name">Data Troll</span></div>
+        <div class="source-chip"><span style="font-size:12px;">🔓</span><span class="source-chip-name">Synthient</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIGZpbGw9IiNGREY2RTMiIHN0cm9rZT0iI0I4ODYwQiIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMyAxMmgxOE0xMiAzYzIuOCAyLjggNC4yIDUuOCA0LjIgOXMtMS40IDYuMi00LjIgOU0xMiAzQzkuMiA1LjggNy44IDguOCA3LjggMTJzMS40IDYuMiA0LjIgOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQjg4NjBCIiBzdHJva2Utd2lkdGg9IjEuMiIvPjwvc3ZnPg==" alt="AliExpress" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">AliExpress</span></div>
+        <div class="source-chip"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzAwNzlCRiIvPjxyZWN0IHg9IjMiIHk9IjMiIHdpZHRoPSI3IiBoZWlnaHQ9IjEyIiByeD0iMiIgZmlsbD0iI2ZmZiIvPjxyZWN0IHg9IjE0IiB5PSIzIiB3aWR0aD0iNyIgaGVpZ2h0PSI4IiByeD0iMiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==" alt="Trello" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;"><span class="source-chip-name">Trello</span></div>
         <div style="font-size:11.5px;color:var(--ink-muted);font-style:italic;padding:5px 4px;">+ many more</div>
-
       </div>
     </div>
 
