@@ -373,22 +373,10 @@
   </div>
 </div>
 
-<!-- NARRATIVE — first sentence only, rest locked -->
+<!-- NARRATIVE — full summary shown -->
 <div class="narrative-box">
   <div class="narrative-label">Our Finding</div>
-  <div class="narrative-text">{{ narrative | split: "." | first }}.</div>
-  <div class="placeholder-rows">
-    <div class="placeholder-row long"></div>
-    <div class="placeholder-row medium"></div>
-    <div class="placeholder-row short"></div>
-  </div>
-  <div class="lock-card" style="margin-top:14px;">
-    <div class="lock-icon">🔒</div>
-    <div class="lock-text">
-      <div class="lock-text-title">Full analysis locked</div>
-      <div class="lock-text-sub">The complete finding — what your data exposure means, which risks are urgent, and what it reveals about you — is available in Deep Dive.</div>
-    </div>
-  </div>
+  <div class="narrative-text">{{ narrative }}</div>
 </div>
 
 <!-- INFO NOTE -->
@@ -571,42 +559,19 @@
 
 <div class="gold-divider"></div>
 
-<!-- REMOVAL TOOLKIT — semi-visible locked card -->
+<!-- REMOVAL TOOLKIT — compact lock card -->
 <div class="guide-section" style="page-break-before:always;break-before:always;">
   <div class="guide-section-header" style="page-break-after:avoid;break-after:avoid;">
     <div class="guide-section-title">Your Personalised Removal Toolkit</div>
     <div class="guide-section-sub">Step-by-step actions specific to your scan results.</div>
   </div>
-  <div style="position:relative;margin-bottom:10px;">
-    <div style="opacity:0.55;">
-      <div class="tip-card no-break">
-        <div class="tip-num">Action 01</div>
-        <div class="tip-title">Personalised action for your scan</div>
-        <div class="tip-body">Based on the specific platforms and breaches found in your scan, we have prepared step-by-step removal and protection instructions tailored specifically to you...</div>
-      </div>
-    </div>
-    <div style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;">
-      <div style="background:rgba(253,246,227,0.93);border:1.5px solid var(--gold-light);border-radius:10px;padding:10px 18px;font-size:12px;font-weight:700;color:var(--gold);display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm);">🔒 Full toolkit unlocked in Deep Dive</div>
+  <div style="background:rgba(184,134,11,0.06);border:1px solid rgba(184,134,11,0.22);border-radius:10px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start;">
+    <span style="font-size:18px;flex-shrink:0;">🔒</span>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#14151a;margin-bottom:4px;">Platform-specific removal steps are included in your Deep Dive report.</div>
+      <div style="font-size:12.5px;color:#343843;line-height:1.55;">Upgrade to see exactly where your data lives and how to get it removed.</div>
     </div>
   </div>
-  <div style="opacity:0.18;margin-bottom:18px;">
-    <div style="height:14px;border-radius:4px;background:var(--ink-muted);width:90%;margin-bottom:8px;"></div>
-    <div style="height:14px;border-radius:4px;background:var(--ink-muted);width:70%;"></div>
-  </div>
-
-  <!-- PRIVACY PROTECTION GUIDE — full, nothing hidden -->
-  <div class="guide-section-header" style="margin-top:32px;page-break-before:always;break-before:always;">
-    <div class="guide-section-title">Your Privacy Protection Guide</div>
-    <div class="guide-section-sub">Steps to take right now to reduce your exposure.</div>
-  </div>
-  <div class="tip-card no-break"><div class="tip-num">Tip 01</div><div class="tip-title">Change your phone-linked account passwords immediately</div><div class="tip-body">Start with your bank, UPI apps (PhonePe, GPay, Paytm), and email. Your phone number is often used for OTP-based login — if it's leaked, these accounts are at risk.</div></div>
-  <div class="tip-card no-break"><div class="tip-num">Tip 02</div><div class="tip-title">Turn on two-factor authentication (2FA)</div><div class="tip-body">Enable 2FA on all major apps — even with a leaked number, a second verification step blocks unauthorised access.</div></div>
-  <div class="tip-card no-break"><div class="tip-num">Tip 03</div><div class="tip-title">Watch out for SIM swap fraud</div><div class="tip-body">Scammers can call your telecom operator and transfer your number to a new SIM — then receive your OTPs. Call your operator (Jio, Airtel, Vi) and ask to lock your SIM against swaps.</div></div>
-  <div class="tip-card no-break"><div class="tip-num">Tip 04</div><div class="tip-title">Do not answer calls from unknown or international numbers</div><div class="tip-body">Once your number is in breach databases, it gets sold to scammers. Calls from +1, +44, +92 with urgent messages about bank accounts or parcels are almost always fraud.</div></div>
-  <div class="tip-card no-break"><div class="tip-num">Tip 05</div><div class="tip-title">Check which apps are linked to your phone number</div><div class="tip-body">Go through your apps — food delivery, travel, shopping — and remove your number from any app you no longer use. The fewer places it appears, the safer you are.</div></div>
-  <div class="tip-card no-break"><div class="tip-num">Tip 06</div><div class="tip-title">Use a separate number for app registrations</div><div class="tip-body">Consider getting a second SIM or using a virtual number just for signing up to apps and websites. Keep your primary number private.</div></div>
-  <div class="tip-card no-break"><div class="tip-num">Tip 07</div><div class="tip-title">Register on the DND (Do Not Disturb) list</div><div class="tip-body">Text START DND to 1909 or use the TRAI DND app to reduce unsolicited calls and messages. Won't stop all spam, but reduces it significantly.</div></div>
-  <div class="tip-card no-break"><div class="tip-num">Tip 08</div><div class="tip-title">Scan again in 90 days</div><div class="tip-body">Breaches are often discovered months after they happen. A clean result today does not guarantee clean results tomorrow. Book your next scan at scanmyshadow.com.</div></div>
 </div>
 
 <div class="gold-divider"></div>
@@ -623,7 +588,7 @@
     <li>Complete platform list with all profile data</li>
     <li>Full digital timeline since {{ earliest_year }}</li>
     <li>Personalised removal toolkit</li>
-    <li>Up to 10 direct source links</li>
+    <li>Direct links to every source — know exactly where to go and what to do</li>
   </ul>
   <a href="https://rzp.io/rzp/scanmyshadow-deep-dive" class="btn-upgrade">Unlock Deep Dive — ₹998</a>
   <div class="upsell-price-note">One-time payment · No subscription · Report delivered within 48 hours</div>
@@ -645,6 +610,24 @@
       💬 Chat with Maya
     </a>
   </div>
+</div>
+
+<div class="gold-divider"></div>
+
+<!-- PRIVACY PROTECTION GUIDE -->
+<div class="guide-section" style="page-break-before:always;break-before:always;">
+  <div class="guide-section-header" style="page-break-after:avoid;break-after:avoid;">
+    <div class="guide-section-title">Your Privacy Protection Guide</div>
+    <div class="guide-section-sub">Steps to take right now to reduce your exposure.</div>
+  </div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 01</div><div class="tip-title">Change your phone-linked account passwords immediately</div><div class="tip-body">Start with your bank, UPI apps (PhonePe, GPay, Paytm), and email. Your phone number is often used for OTP-based login — if it's leaked, these accounts are at risk.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 02</div><div class="tip-title">Turn on two-factor authentication (2FA)</div><div class="tip-body">Enable 2FA on all major apps — even with a leaked number, a second verification step blocks unauthorised access.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 03</div><div class="tip-title">Watch out for SIM swap fraud</div><div class="tip-body">Scammers can call your telecom operator and transfer your number to a new SIM — then receive your OTPs. Call your operator (Jio, Airtel, Vi) and ask to lock your SIM against swaps.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 04</div><div class="tip-title">Do not answer calls from unknown or international numbers</div><div class="tip-body">Once your number is in breach databases, it gets sold to scammers. Calls from +1, +44, +92 with urgent messages about bank accounts or parcels are almost always fraud.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 05</div><div class="tip-title">Check which apps are linked to your phone number</div><div class="tip-body">Go through your apps — food delivery, travel, shopping — and remove your number from any app you no longer use. The fewer places it appears, the safer you are.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 06</div><div class="tip-title">Use a separate number for app registrations</div><div class="tip-body">Consider getting a second SIM or using a virtual number just for signing up to apps and websites. Keep your primary number private.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 07</div><div class="tip-title">Register on the DND (Do Not Disturb) list</div><div class="tip-body">Text START DND to 1909 or use the TRAI DND app to reduce unsolicited calls and messages. Won't stop all spam, but reduces it significantly.</div></div>
+  <div class="tip-card no-break"><div class="tip-num">Tip 08</div><div class="tip-title">Scan again in 90 days</div><div class="tip-body">Breaches are often discovered months after they happen. A clean result today does not guarantee clean results tomorrow. Book your next scan at scanmyshadow.com.</div></div>
 </div>
 
 <!-- FOOTER -->
