@@ -156,10 +156,81 @@
   .source-chip img { width: 18px; height: 18px; object-fit: contain; flex-shrink: 0; }
   .source-chip-name { font-size: 11.5px; color: var(--ink-soft); font-weight: 500; }
 
-  /* CTAs */
-  .cta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 32px; }
-  .btn-secondary { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--white); border: 1.5px solid var(--gold-bright); border-radius: 12px; padding: 14px 18px; font-size: 13px; font-weight: 700; color: var(--ink); text-decoration: none; box-shadow: 0 2px 10px rgba(184,134,11,0.14), var(--shadow-sm); }
-  .btn-secondary .btn-icon { font-size: 16px; }
+  /* ACTION CARD */
+  .action-card {
+    page-break-before: always;
+    break-before: always;
+    background: linear-gradient(160deg, #fffdf7 0%, #fdf6e3 100%);
+    border: 1.5px solid rgba(201,154,58,0.30);
+    border-radius: 20px;
+    padding: 40px 36px;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(201,154,58,0.14), 0 2px 8px rgba(20,21,26,0.05);
+  }
+  .action-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #a67922, #d4a017, #f3cf74, #d4a017, #a67922);
+  }
+  .action-card-icon { font-size: 36px; margin-bottom: 12px; }
+  .action-card-headline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #14151a;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .action-card-sub {
+    font-size: 13.5px;
+    color: #343843;
+    max-width: 460px;
+    margin: 0 auto 22px;
+    line-height: 1.65;
+  }
+  .action-card-sub strong { color: #14151a; }
+  .action-btn-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .action-btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(160deg, #FFD000, #F5A800 50%, #E08C00);
+    color: #1A0F00;
+    font-size: 13px;
+    font-weight: 900;
+    padding: 14px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    box-shadow: 0 4px 18px rgba(245,168,0,0.45), inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .action-btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.9);
+    border: 1.5px solid rgba(201,154,58,0.45);
+    border-radius: 999px;
+    padding: 14px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #14151a;
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(201,154,58,0.12);
+  }
 
   /* GUIDE / REMOVAL TOOLKIT */
   .guide-section { margin-top: 32px; }
@@ -175,6 +246,8 @@
 
   /* FOOTER */
   .report-footer { border-top: 1px solid var(--border); padding-top: 20px; text-align: center; }
+  .footer-main { font-size: 11px; font-weight: 800; color: var(--ink-soft); margin-bottom: 4px; }
+  .footer-conf { font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
   .footer-text { font-size: 11px; color: rgba(17,17,24,0.72); line-height: 1.7; }
   .footer-id { font-size: 10px; color: rgba(17,17,24,0.63); margin-top: 6px; font-family: 'Courier New', monospace; letter-spacing: 0.04em; }
 
@@ -191,7 +264,6 @@
     body { padding: 16px 14px 40px; }
     .stat-row { grid-template-columns: 1fr 1fr; }
     .stat-row .stat-card:last-child { grid-column: 1/-1; }
-    .cta-row { grid-template-columns: 1fr; }
     .hero { padding: 24px 20px; }
     .section-body { padding: 16px; }
     .platform-row { grid-template-columns: 42px 1fr; }
@@ -481,14 +553,6 @@
   </div>
 </div>
 
-<!-- CTAs -->
-<div class="cta-row">
-  <a href="https://www.scanmyshadow.com/#embed06" class="btn-secondary"><span class="btn-icon">🔍</span>Scan a New Number or Email</a>
-  <a href="https://app.scanmyshadow.com/maya-standalone.html?id={{ scan_id }}" class="btn-secondary"><span class="btn-icon">💬</span>Chat with Maya — Ask Questions</a>
-</div>
-
-<div class="gold-divider"></div>
-
 <!-- REMOVAL TOOLKIT + PRIVACY GUIDE -->
 <div class="guide-section" style="page-break-before:always;break-before:always;">
   <div class="guide-section-header" style="page-break-after:avoid;break-after:avoid;">
@@ -511,9 +575,30 @@
   <div class="tip-card no-break"><div class="tip-num">Tip 08</div><div class="tip-title">Scan again in 90 days</div><div class="tip-body">Breaches are discovered months after they happen. A clean result today does not guarantee clean results tomorrow. Book your next scan at scanmyshadow.com.</div></div>
 </div>
 
+<!-- CTAs -->
+<div class="action-card">
+  <div class="action-card-icon">🔍</div>
+  <div class="action-card-headline">Scan Someone Else Now</div>
+  <div class="action-card-sub">
+    Your privacy is clear — but what about the people closest to you?<br>
+    Run a scan on a family member, partner, or friend.<br>
+    <strong>Your next suggested rescan: {{ next_scan_date }}</strong>
+  </div>
+  <div class="action-btn-row">
+    <a href="https://www.scanmyshadow.com/#embed06" class="action-btn-primary">
+      🔍 Start a New Scan
+    </a>
+    <a href="https://app.scanmyshadow.com/maya-standalone.html?id={{ scan_id }}" class="action-btn-secondary">
+      💬 Chat with Maya
+    </a>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <div class="report-footer">
-  <div class="footer-text">This report was prepared exclusively for the person who submitted this scan. The information above is based on publicly available data sources and known breach databases. ScanMyShadow does not store your personal data beyond 96 hours of scan completion.<br>For support, email us at support@scanmyshadow.com</div>
+  <div class="footer-main">ScanMyShadow · Operated by Jaishree Exports · GSTIN: 23AIVPG9795M1Z6 · Gwalior, MP, India</div>
+  <div class="footer-conf">Confidential — not for redistribution</div>
+  <div class="footer-text">This report was prepared exclusively for the person who submitted this scan. The information above is based on publicly available data sources and known breach databases. ScanMyShadow does not store your personal data beyond 96 hours of scan completion. For support, email us at support@scanmyshadow.com</div>
   <div class="footer-id">Scan ID: {{ scan_id }} &nbsp;·&nbsp; Next suggested scan: {{ next_scan_date }}</div>
 </div>
 
